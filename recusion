@@ -1,0 +1,18 @@
+recursion must including 2 cases: base case(stop conditions); resursion case(dose the recursion)
+
+how python keep track of the recursion functions call ?
+it keeps track with stack specifically one called [call stack]. whenever we make a funcation call, we push a frame object onto the call stack, and whenever we return from a function call (which gonna use a little bit of memory), we pop it off the call stack. where the call stack is a stack of frame objects, particularly, a frame object is a function call.
+stack overflow: your recursion function gets out of control， doesn't stop recursing(eventually it will eat up your memory), python has a built-in limit of 1000 function calls.
+
+how python excute the recursion?
+remeber the call stack. when you first call a function, it will be added into the call stack, and the that function return xxxx*fucntion(means call this function again), so it will put a new fram object onto the toppest of the call stack, remember the older functuion call is still there, underneath the new frame object.so there gonna be multiple varivables...in the end, we reach the base case, this function does't have to do anymore recursing. Now it is time to notice!!! we then pop off the older frame object from the call stack(which means do the returnning)
+
+when you should use the recursion:
+1:the problem has a tree-structure
+2:the problem requires backtracking
+both of above 2 should be required.
+
+
+what if i conduct the recursion on the huge datasets that need to do more than 1000 functions?
+you won't need to hold on to local variables, because there is no code after the recursion function call that will need them. so there is no need to keep the frame object on the call stack. you can go beyond the 1000 function because the call stack isn't growing. JUST using the TCO(tail call optimizatation)
+so there are 2 tricks: 1 TCO, prevents the stacks overflow by preventing the stack from growing. 2 Memorization(e.g. LRU, speed up the recursion alogrithm by catching the return values)
